@@ -1,0 +1,5 @@
+TYPE,ADDRESS,AMOUNT,CURRENCY,SOURCE_WALLET
+email,recipient@gmail.com,2500,USD,USD
+email,recipient1@gmail.com,1,BTC,BTC
+btc_onchain,tb1nw....ep8k,1,BTC,BTC
+btc_onchain,tb1nx....w0ea,100,USD,USD

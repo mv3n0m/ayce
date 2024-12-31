@@ -1,0 +1,1000 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body {
+  font-family: var(--font-helvetica);
+  box-sizing: border-box;
+}
+
+/* default rem size is 16px = 1 rem. with 16 x 0.625 = 10 or font-size 62.5%, 1 rem = 10px, base 10 is more convinient */
+html {
+  font-size: 62.5%;
+}
+
+/* restores default font size of 16px */
+body{
+  font-size: 1.6rem;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* removes default chrome calendar icon */
+input[type='date']::-webkit-calendar-picker-indicator {
+  background: transparent;
+  bottom: 0;
+  color: transparent;
+  cursor: pointer;
+  height: auto;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: auto;
+}
+
+/* change default input type date color */
+input[type=date]:invalid::-webkit-datetime-edit {
+  color: #9AABB5;
+}
+
+h1, h2, h3, h4, h5, h6{
+  font-style: normal;
+  color: #022C45;
+}
+
+h1, h2, h3{
+  font-weight: 400;
+}
+
+h4, h5, h6{
+  font-weight: 700;
+}
+
+h1{
+  font-size: 5.6rem;
+  line-height: 129%;
+}
+
+h2{
+  font-size: 4.8rem;
+  line-height: 117%;
+}
+
+h3{
+  font-size: 4rem;
+  line-height: 120%;
+}
+.h3{
+  font-size: 4rem;
+  line-height: 120%;
+}
+
+h4{
+  font-size: 3.2rem;
+  line-height: 125%;
+}
+
+h5{
+  font-size: 2.4rem;
+  line-height: 133%;
+}
+
+h6{
+  font-size: 2rem;
+  line-height: 140%;
+}
+
+h1.display, h2.display, h3.display, h4.display, h5.display, h6.display{
+  font-family: var(--font-ginto);
+  font-style: normal;
+  font-weight: 700;
+  color: #022C45;
+}
+
+h1.display{
+  font-size: 8rem;
+  line-height: 100%;
+}
+
+h2.display{
+  font-size: 6.4rem;
+  line-height: 100%;
+}
+
+h2.display{
+  font-size: 4.8rem;
+  line-height: 100%;
+}
+
+h4.display{
+  font-size: 3.2rem;
+  line-height: 125%;
+}
+
+h5.display{
+  font-size: 2.4rem;
+  line-height: 133%;
+}
+
+h6.display{
+  font-size: 1.6rem;
+  line-height: 150%;
+}
+
+.body-xl, .body-lg, .body, .body-sm, .body-xs, .meta{
+  font-style: normal;
+}
+
+.body-xl{
+  font-size: 2.4rem;
+  line-height: 133%;
+}
+
+.body-lg{
+  font-size: 2rem;
+  line-height: 140%;
+}
+
+.body{
+  font-size: 1.6rem;
+  line-height: 150%;
+}
+
+.body-sm{
+  font-size: 1.4rem;
+  line-height: 143%;
+}
+
+.body-xs{
+  font-size: 1.3rem;
+  line-height: 138%;
+}
+
+.meta{
+  font-size: 1.2rem;
+  line-height: 133%;
+}
+
+.h1{
+  font-size: 5.6rem;
+  line-height: 129%;
+}
+
+.h2{
+  font-size: 4.8rem;
+  line-height: 117%;
+}
+
+select {
+  /* for Firefox */
+  -moz-appearance: none;
+  /* for Chrome */
+  -webkit-appearance: none;
+}
+
+/* For IE10 */
+select::-ms-expand {
+  display: none;
+}
+
+select:required:invalid {
+  color: #9AABB5;
+}
+
+option[value=""][disabled] {
+  display: none;
+}
+
+input[type="text"]:focus, input[type="name"]:focus ,input[type="email"]:focus, input[type='number']:focus, input[type="password"]:focus, textarea:focus, select:focus {
+  border: none;
+  outline: solid 2px #022C45;
+}
+
+input[type="number"].inputnoborder:focus{
+  border: none;
+  outline: none;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+select.no-border:focus{
+  border: none;
+  outline: none;
+}
+
+input[type=text].wallet-modal, input[type=email].wallet-modal, input[type=password].wallet-modal, select:focus.wallet-modal{
+  border: 1px solid #ccd5da;
+}
+
+input[type=text].wallet, input[type=text].wallet:focus{
+  border: none;
+  outline: none;
+}
+
+input[type=checkbox]{
+	display: none
+}
+
+/* toggle checkbox */
+input[type=checkbox].toggle{
+	height: 0;
+	width: 0;
+	visibility: hidden;
+}
+
+label.toggle {
+	cursor: pointer;
+	text-indent: -9999px;
+	width: 44px;
+	height: 22px;
+	background: #CCD5DA;
+	display: block;
+	border-radius: 22px;
+	position: relative;
+}
+
+label.toggle:after {
+	content: '';
+	position: absolute;
+	top: 2px; 
+	left: 3px;
+	width: 18px;
+	height: 18px;
+	background: #fff;
+	border-radius: 18px;
+	transition: 0.2s;
+}
+
+input:checked + label.toggle {
+	background: #E91675; 
+}
+
+input:checked + label.toggle:after {
+	left: calc(100% - 2px); /* 2px right padding */
+	transform: translateX(-100%);
+}
+
+label.toggle:active:after {
+	width: 23px; /* liquid effect */
+}
+
+/* red square checkbox */
+input[type="checkbox"].check + label {
+  position: relative;
+  padding-left: 25px; /* Adjust this value as needed */
+  cursor: pointer;
+}
+
+/* Create the checkbox shape */
+input[type="checkbox"].check + label::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 16px; /* Adjust this value as needed */
+  height: 16px; /* Adjust this value as needed */
+  border: 2px solid #E01470; /* Adjust border color and size as needed */
+  background-color: #fff; /* Adjust background color as needed */
+  border-radius: 3px;
+}
+
+/* Create the checkbox shape */
+input[type="checkbox"].check + label.default-check::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 16px; /* Adjust this value as needed */
+  height: 16px; /* Adjust this value as needed */
+  border: 2px solid #35566A; /* Adjust border color and size as needed */
+  background-color: #fff; /* Adjust background color as needed */
+  border-radius: 3px;
+}
+
+/* Style the checkbox when checked */
+input[type="checkbox"]:checked + label.terms::before {
+  background-color: #E01470; /* Adjust background color as needed */
+}
+
+input[type="checkbox"]:checked + label.default-check::before{
+  background-color: #35566A;
+}
+/* Create a checkmark icon */
+input[type="checkbox"] + label.terms::after, input[type="checkbox"] + label.default-check::after  {
+  content: '\2713'; /* Unicode character for checkmark */
+  position: absolute;
+  left: 3px; /* Adjust this value as needed */
+  top: -2px; /* Adjust this value as needed */
+  color: #fff; /* Adjust checkmark color as needed */
+  font-size: 14px; /* Adjust checkmark size as needed */
+  visibility: hidden;
+}
+
+/* Show the checkmark when the checkbox is checked */
+input[type="checkbox"]:checked + label.terms::after, input[type="checkbox"]:checked + label.default-check::after  {
+  visibility: visible;
+}
+
+/* custom slider */
+.slider-container {
+  position: relative;
+  width: 100%;
+}
+
+.slider-track {
+  position: absolute;
+  top: 0;
+  height: 4px;
+  background: #F5F7F8; /* Color of the track */
+  border-radius: 16px;
+  width: 100%;
+  z-index: 1;
+}
+
+.slider {
+  position: relative;
+  appearance: none;
+  height: 4px;
+  padding: 3px 0;
+  outline: none;
+  width: 100%;
+  z-index: 3;
+  background: transparent; /* Make the slider track transparent */
+  display: flex;
+  align-items: center;
+}
+
+.slider::-webkit-slider-runnable-track {
+  background: transparent; /* Make the slider track transparent on Webkit browsers */
+}
+
+.slider::-moz-range-track {
+  background: transparent; /* Make the slider track transparent on Firefox */
+}
+
+.slider::-webkit-slider-thumb {
+  /* transform: translateY(-13px); */
+  position: relative;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  background: #E91675;
+  cursor: pointer;
+  border-radius: 50%;
+  z-index: 3;
+}
+
+.slider::-moz-range-thumb {
+  /* transform: translateY(-13px); */
+  position: relative;
+  width: 16px;
+  height: 16px;
+  background: #E91675;
+  cursor: pointer;
+  border-radius: 50%;
+  z-index: 3;
+}
+
+.slider-fill {
+  position: absolute;
+  top: 0;
+  height: 4px;
+  background: #E91675; /* Color of the filled part */
+  border-radius: 16px;
+  z-index: 2;
+}
+
+.box-shadow{
+  box-shadow: 0px 20px 40px 0px rgba(2, 44, 69, 0.05);
+}
+
+.width-container{
+  width: 496px;
+}
+
+.width-payer-success{
+  max-width: 944px;
+}
+
+.width-payer-success-content{
+  max-width: 488px;
+}
+
+.primary-button{
+  box-shadow: 4px 4px 0px 0px rgba(2, 44, 69, 1);
+  border-radius: 80px
+}
+
+.primary-button:active{
+  transform: translateY(4px);
+  box-shadow: 0px 0px 0px 0px rgba(2, 44, 69, 1);
+  transition: all 0.1s;
+}
+
+.noshadow-button{
+  border-radius: 80px
+}
+
+/* side menu */
+.sidemenu{
+  width: 312px;
+  max-width: 312px;
+  min-width: 312px;
+  box-shadow: -10px 0px 40px 0px rgba(0, 0, 0, 0.05);
+}
+
+.sidemenu-margin{
+  margin-left: 312px;
+}
+
+.sidemenu-mobile-width{
+  width: 287px;
+}
+
+.sidemenu-border{
+  position: absolute;
+  height: 100%;
+  right: 0;
+  background: var(--white, #FFF);
+  box-shadow: -10px 0px 40px 0px rgba(0, 0, 0, 0.05);
+  width: 1px;
+}
+
+.sidemenu-padding{
+  padding-left: 312px;
+}
+
+/* for active SideMenu links */
+.active-link{
+  display: flex;
+  padding: 0.8rem 0rem 0.8rem 3.2rem;
+  align-items: center;
+  background-color: white;
+}
+
+.active-link div{
+  background-color: #FFF0F7;
+}
+
+.active-link div :first-child{
+  color: #E91675;
+}
+
+.active-link p{
+  color: #E91675;
+  font-weight: 700;
+}
+
+.active-link-onboarding, .active-link-onboarding-last{
+  display: flex;
+  padding: 0.8rem 0rem 0.8rem 3.2rem;
+  align-items: center;
+}
+
+.active-link-onboarding :first-child{
+  background-color: #E91675;
+}
+
+.active-link-onboarding :first-child p{
+  color: white;
+}
+
+.active-link-onboarding p:last-child{
+  color: #E91675;
+  font-weight: 700;
+}
+
+/* for last element in onboarding menu */
+.active-link-onboarding-last :first-child{
+  background-color: #E91675;
+}
+
+.active-link-onboarding-last :first-child p{
+  color: white;
+  background-color: white;
+}
+
+.active-link-onboarding-last p:last-child{
+  color: #E91675;
+  font-weight: 700;
+}
+
+/* active sub link for payment sub menu */
+.active-sublink{
+  color: #E91675;
+}
+
+.aligned-number{
+  font-size: 1.4rem;
+  line-height: 143%;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.onboard-line {
+  border-left: 2px solid #CCD5DA;
+  height: 24px;
+  position: absolute;
+  left: 50%;
+  margin-left: -1px;
+  top: 24px;
+}
+
+.document-upload-hover-message{
+  width: 100%;
+  left: 104%;
+  bottom: 6%;
+  position: absolute;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.document-upload-hover:hover .document-upload-hover-message{
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-width{
+  box-sizing: none;
+  width: 464px;
+  max-width: 464px;
+  height: 484px;
+}
+
+.modal-width-noheight{
+  box-sizing: none;
+  width: 464px;
+  max-width: 464px;
+}
+
+.h3{
+  font-size: 4rem;
+  line-height: 120%;
+}
+
+.calculator{
+  max-width: 336px;
+}
+
+.calculator-button{
+  height: 8rem;
+  width: 8rem;
+  font-size: 4rem;
+  line-height: 120%;
+}
+
+.calculator-button:active{
+  font-size: 4rem;
+  line-height: 120%;
+  background-color: #EEF98E;
+}
+
+/* side menu animation */
+.menu-enter {
+  transform: translateX(-100%);
+}
+.menu-enter-active {
+  transform: translateX(0);
+  transition: transform 200ms ease-in-out;
+}
+.menu-exit {
+  transform: translateX(0);
+}
+.menu-exit-active {
+  transform: translateX(-100%);
+  transition: transform 200ms ease-in-out;
+}
+
+.menu-overlay-enter {
+  opacity: 0;
+}
+.menu-overlay-enter-active {
+  opacity: 0.25;
+  transition: opacity 200ms ease-in-out;
+}
+.menu-overlay-exit {
+  opacity: 0.25;
+}
+.menu-overlay-exit-active {
+  opacity: 0;
+  transition: opacity 200ms ease-in-out;
+}
+
+.wallet-main, .wallet-payer{
+  width: 100%;
+  max-width: 464px;
+  height: 576px;
+}
+
+.wallet-main-maxheight{
+  width: 100%;
+  max-width: 464px;
+  min-height: 576px;
+  height: 100%;
+}
+
+.wallet-payer{
+  height: 100%;
+}
+
+.payment-create{
+  width: 100%;
+  max-width: 464px;
+}
+
+/* chain tab */
+
+.chain-tabs {
+  display: flex;
+  position: relative;
+}
+
+input[type="radio"].chain {
+  display: none;
+}
+
+.chain-tab {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  width: 50%;
+  cursor: pointer;
+  transition: color 0.15s ease-in, background-color 0.15s ease-in;
+}
+
+input[type="radio"].chain:checked + .chain-tab {
+  color: #022C45;
+}
+
+.chain-tab.active {
+  color: #022C45;
+}
+
+input[id="radio-onchain"].chain:checked ~ .chain-glider {
+  transform: translateX(0);
+}
+
+input[id="radio-lightning"].chain:checked ~ .chain-glider {
+  transform: translateX(100%);
+}
+
+.chain-glider {
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  height: 2px;
+  width: 50%;
+  background-color: #022C45;
+  z-index: 10;
+  transition: 0.25s ease-out;
+}
+
+/* wallet tab, styling for btc and usd wallet tab slider */
+.wallet-tabs {
+  display: flex;
+  position: relative;
+  border-radius: 4rem;
+}
+
+input[type="radio"].wallet {
+  display: none;
+}
+
+.wallet-tab, .wallet-tab-usd, .wallet-tab-onchainlightning {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 48px;
+  width: 50%;
+  cursor: pointer;
+  transition: color 0.15s ease-in, background-color 0.15s ease-in;
+  border-radius: 4rem;
+}
+
+/* input[type="radio"].wallet:checked + .wallet-tab {
+  color: #022C45;
+  background-color: #EEF98E;
+} */
+
+.wallet-tab.active {
+  color: #022C45;
+  background-color: #EEF98E;
+}
+
+.wallet-tab-usd.active {
+  color: #022C45;
+  background-color: #58F5AA;
+}
+
+.wallet-tab-onchainlightning.active {
+  color: #E91675;
+  background-color: white;
+  font-weight: bold;
+}
+
+input[id="radio-transfer"].wallet:checked ~ .wallet-glider {
+  transform: translateX(0);
+}
+
+input[id="radio-exchange"].wallet:checked ~ .wallet-glider {
+  transform: translateX(100%);
+}
+
+input[id="radio-transfer"].wallet:checked ~ .wallet-glider-usd {
+  transform: translateX(0);
+}
+
+input[id="radio-exchange"].wallet:checked ~ .wallet-glider-usd {
+  transform: translateX(100%);
+}
+
+input[id="radio-transfer"].wallet:checked ~ .wallet-glider-onchainlightning {
+  transform: translateX(0);
+}
+
+input[id="radio-exchange"].wallet:checked ~ .wallet-glider-onchainlightning {
+  transform: translateX(100%);
+}
+
+.wallet-glider, .wallet-glider-usd, .wallet-glider-onchainlightning{
+  position: absolute;
+  display: flex;
+  height: 48px;
+  width: 50%;
+  background-color: #EEF98E;
+  z-index: 1;
+  border-radius: 4rem;
+  transition: 0.25s ease-out;
+}
+
+.wallet-glider-usd{
+  background-color: #58F5AA;
+}
+
+.wallet-glider-onchainlightning{
+  background-color: white;
+}
+
+.background-logo{
+  width: 384px;
+  height: 384px;
+}
+
+.qrbackground{
+  height: 280px;
+  width: 280px;
+}
+
+.login-logo{
+  width: 152.5px;
+  height: 50px;
+}
+
+.profile-dropdown{
+  width: 216px;
+  top: 45px;
+  right: 0px
+}
+
+.lineChart{
+  max-height: 250px;
+}
+
+.maskgroup{
+  width: 100%;
+}
+
+/* .input-container {
+  display: block;
+  outline: none;
+  position: relative;
+}
+
+.transparent-input,
+.textarea-size {
+  box-sizing: border-box;
+  overflow: hidden;
+  width: 100%;
+}
+
+.transparent-input {
+  position: absolute;
+  resize: none;
+  white-space: normal;
+  background: none;
+  border: none;
+  outline: none;
+}
+
+.transparent-input::-webkit-inner-spin-button,
+.transparent-input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.transparent-input:active {
+  opacity: 0;
+}
+
+.textarea-size {
+  visibility: visible;
+} */
+
+/* tailwind lg breakpoint */
+@media only screen and (max-width: 1023px) {
+  body{
+    font-size: 1.4rem;
+  }
+  .body{
+    font-size: 1.4rem;
+    line-height: 143%;
+  }
+  .body-lg{
+    font-size: 1.6rem;
+    line-height: 150%;
+  }
+
+  h3{
+    font-size: 2.4rem;
+    line-height: 133%;
+  }
+  .h3{
+    font-size: 3.2rem;
+    line-height: 125%;
+  }
+
+  h5{
+    font-size: 2rem;
+    line-height: 140%;
+  }
+
+  h1.display{
+    font-size: 8rem;
+    line-height: 100%;
+  }
+  
+  h2.display{
+    font-size: 6.4rem;
+    line-height: 100%;
+  }
+  
+  h2.display{
+    font-size: 4.8rem;
+    line-height: 100%;
+  }
+  
+  h4.display{
+    font-size: 2.4rem;
+    line-height: 133%;
+  }
+  
+  h5.display{
+    font-size: 1.6rem;
+    line-height: 150%;
+  }
+  
+  h6.display{
+    font-size: 1.4rem;
+    line-height: 140%;
+  }
+  .modal-width{
+    margin-top: 80px;
+    padding-top:48px;
+    box-sizing: none;
+    width: 100%;
+    max-width: 100%;
+    height: 100%;
+  }
+
+  .modal-width-noheight{
+    margin-top: 80px;
+    padding-top:48px;
+    box-sizing: none;
+    width: 100%;
+    max-width: 100%;
+    height: 100%;
+  }
+
+  .otp-input {
+    /* important tag is needed to overwrite otp */
+    width: 48px !important;
+    height: 64px !important;
+  }
+
+  .wallet-main{
+    max-width: 464px;
+    width: 100%;
+    height: 504px;
+  }
+
+  .wallet-main-maxheight{
+    max-width: 464px;
+    width: 100%;
+    height: 100%;
+    min-height: 504px;
+  }
+
+  .sidemenu-padding{
+    padding-left: 0px;
+  }
+
+  .wallet-tab-onchainlightning{
+    height: 44px;
+  }
+
+  .wallet-glider-onchainlightning{
+    height: 44px;
+  }
+
+  .background-logo{
+    width: 327px;
+    height: 324px;
+  }
+
+  .wallet-payer{
+    max-width: 359px;
+  }
+
+  .qrbackground{
+    height: 240px;
+    width: 240px;
+  }
+
+  .width-container{
+    width: 100%;
+  }
+
+  .calculator{
+    max-width: 240px;
+  }
+  
+  .calculator-button{
+    height: 6.4rem;
+    width: 6.4rem;
+    font-size: 3.2rem;
+    line-height: 125%;
+  }
+  
+  .calculator-button:active{
+    font-size: 3.2rem;
+    line-height: 125%;
+    background-color: #EEF98E;
+  }
+
+  .login-logo{
+    width: 197.6px;
+    height: 32px;
+  }
+
+  .width-payer-success{
+    max-width: 100%;
+  }
+  
+  .width-payer-success-content{
+    max-width: 100%;
+  }
+}
+
+/* used for saving to PDF */
+@media print {
+  .sidemenu-padding{
+    padding-left: 0px;
+  }
+
+  .hide-print{
+    display: none;
+  }
+}
