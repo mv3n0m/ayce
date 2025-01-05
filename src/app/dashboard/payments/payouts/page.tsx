@@ -25,7 +25,7 @@ export default function PayoutsPage() {
     if (!token) return;  // No token, don't fetch
     const fetchData = async () => {
       try {
-        const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/accounts/get-balances`, {
+        const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/account/get-balances`, {
           headers: {
             'Authorization': `Bearer ${token}` // Include the token in the authorization header
           }
@@ -45,7 +45,7 @@ export default function PayoutsPage() {
 
     fetchData();
   }, [token]);
-  
+
   return (
     <div className='flex mx-16 mt-32 w-full sidemenu-padding'>
       <div className='flex flex-col w-full relative'>
@@ -75,7 +75,7 @@ export default function PayoutsPage() {
               </div>
             </div>
           </div>
-      
+
           <div className='bg-secondary-aquamarineLight rounded-3xl border-secondary-aquamarine border-2 w-1/2'>
             <div className='flex justify-between items-start px-10 py-8'>
               <div className='flex flex-col justify-center'>

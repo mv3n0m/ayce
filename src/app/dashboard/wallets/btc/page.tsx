@@ -64,14 +64,14 @@ const WalletsBtcPage: React.FC = () => {
   // Next step for transfer to confirmation page, checks if btc balance is > than inputBtcValue
   const nextTransferConfirm = async (event) => {
     event.preventDefault();
-  
+
     // Validate BTC address
     if (!/^[a-zA-Z0-9]{27,34}$/.test(inputBtcAddress)) {
       console.error("Invalid BTC address");
       setIncorrectAddress(true);
       return; // Exit the function early if the BTC address is invalid
     }
-  
+
     // Check if inputBtcValue is smaller than btcData.amount
     if (parseFloat(inputBtcValue) < parseFloat(btcData.amount)) {
       setTransferstep(transferStep + 1);
@@ -80,7 +80,7 @@ const WalletsBtcPage: React.FC = () => {
       setIncorrectAddress(false);
     }
   };
-  
+
   // Next step for exchange
   const nextExchange = async (event) => {
     event.preventDefault();
@@ -102,7 +102,7 @@ const WalletsBtcPage: React.FC = () => {
     if (!token) return;  // No token, don't fetch
     const fetchData = async () => {
       try {
-        const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/accounts/get-balances`, {
+        const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/account/get-balances`, {
           headers: {
             'Authorization': `Bearer ${token}` // Include the token in the authorization header
           }
@@ -210,7 +210,7 @@ const WalletsBtcPage: React.FC = () => {
                 }
               }
             );
-            
+
             if (refreshResponse.data.conversion_rate) {
               setConversionRate(refreshResponse.data.conversion_rate);
             } else {
@@ -233,12 +233,12 @@ const WalletsBtcPage: React.FC = () => {
   // first transfer API call
   const handleSubmitTransfer = async (event) => {
     event.preventDefault();
-  
+
     const payload = {
       "amount": parseFloat(inputBtcValue),
       "address": inputBtcAddress,
     };
-  
+
     try {
       const response = await axios.post(
         `${process.env.NEXT_PUBLIC_API_URL}/transactions/transfer-btc`,
@@ -250,7 +250,7 @@ const WalletsBtcPage: React.FC = () => {
           }
         }
       );
-  
+
       console.log("Server Response:", response.data);
       if (response.data.token && response.data.success) {
         setTransferToken(response.data.token);
@@ -260,10 +260,10 @@ const WalletsBtcPage: React.FC = () => {
       }
     } catch (error) {
       console.error("Error making the API call:", error.response?.data || error.message);
-      
+
     }
   };
-  
+
   const [calculatedExchangeUsd, setCalculatedExchangeUsd] = useState(0);
 
   useEffect(() => {
@@ -316,7 +316,7 @@ const WalletsBtcPage: React.FC = () => {
       confirmOtp();
     }
   }, [otp, transferToken, token]);
-  
+
 
   return (
     <div className='flex mx-2 lg:mx-16 mt-24 lg:mt-32 w-full sidemenu-padding'>
@@ -353,34 +353,34 @@ const WalletsBtcPage: React.FC = () => {
             <>
             <div className="wallet-tabs flex justify-between">
                 <input type="radio" id="radio-transfer" name="wallet-tabs" value='transfer' checked={walletTabState === 'transfer'} onChange={handleWalletTabChange} className='wallet' />
-                <label 
+                <label
                     className={`z-10 wallet-tab body text-placeholder py-3 rounded-4xl w-1/2 flex items-center justify-center ${walletTabState === 'transfer' ? 'active' : 'text-placeholder'}`}
                     htmlFor="radio-transfer">Transfer
                 </label>
                 <input type="radio" id="radio-exchange" name="wallet-tabs" value='exchange' checked={walletTabState === 'exchange'} onChange={handleWalletTabChange} className='wallet' />
-                <label 
+                <label
                     className={`z-10 wallet-tab body text-placeholder py-3 rounded-4xl w-1/2 flex items-center justify-center ${walletTabState === 'exchange' ? 'active' : 'text-placeholder'}`}
                     htmlFor="radio-exchange">Exchange
                 </label>
                 <span className="wallet-glider"></span>
             </div>
-            
+
             <div className='flex items-center justify-center w-full'>
               {walletTabState === 'transfer' && (
                 <form className='w-full' onSubmit={nextTransferConfirm}>
-                  
+
                   <div className='relative w-full flex justify-center'>
-                    <InputConversion 
-                      inputBtcValue={inputBtcValue} 
+                    <InputConversion
+                      inputBtcValue={inputBtcValue}
                       setInputBtcValue={setInputBtcValue}
                       setParentConversionRate={setParentConversionRate}
-                      exchangeBtcValue={exchangeBtcValue} 
+                      exchangeBtcValue={exchangeBtcValue}
                       setExchangeBtcValue={setExchangeBtcValue}
                       btcData={btcData} usdData={btcData.in_usd}
                     />
 
                     <div className='flex items-center absolute bottom-0 mb-4'>
-                      
+
                     {insufficientBalance && (
                       <div className='flex items-center'>
                         <Alert className='h-5 w-5 text-states-error max-w-fit inline-block mr-1' />
@@ -389,15 +389,15 @@ const WalletsBtcPage: React.FC = () => {
                     )}
                     </div>
                   </div>
-                  
+
                   <div className="chain-tabs flex justify-between mb-6 lg:mb-10">
                     <input type="radio" id="radio-onchain" name="chain-tabs" value='onchain' checked={chainTabState === 'onchain'} onChange={handleChainTabChange} className='chain' />
-                    <label 
+                    <label
                     className={`z-10 chain-tab font-bold body py-2 w-1/2 flex items-center justify-center border-b border-line ${chainTabState === 'onchain' ? 'active' : 'z-10 chain-tab body py-2 w-1/2 flex items-center justify-center text-placeholder'}`}
                     htmlFor="radio-onchain">On-chain
                     </label>
                     <input type="radio" id="radio-lightning" name="chain-tabs" value='lightning' checked={chainTabState === 'lightning'} onChange={handleChainTabChange} className='chain' />
-                    <label 
+                    <label
                     className={`z-10 chain-tab font-bold body py-2 w-1/2 flex items-center justify-center border-b border-line ${chainTabState === 'lightning' ? 'active' : 'z-10 chain-tab body py-2 w-1/2 flex items-center justify-center text-placeholder'}`}
                     htmlFor="radio-lightning">Lightning
                     </label>
@@ -448,11 +448,11 @@ const WalletsBtcPage: React.FC = () => {
               {walletTabState === 'exchange' && (
                 <form className='w-full' onSubmit={handleSubmitExchange} >
                   <div className='relative w-full flex justify-center'>
-                    <InputConversion 
-                      inputBtcValue={inputBtcValue} 
+                    <InputConversion
+                      inputBtcValue={inputBtcValue}
                       setInputBtcValue={setInputBtcValue}
                       setParentConversionRate={setParentConversionRate}
-                      exchangeBtcValue={exchangeBtcValue} 
+                      exchangeBtcValue={exchangeBtcValue}
                       setExchangeBtcValue={setExchangeBtcValue}
                       btcData={btcData} usdData={btcData.in_usd}
                     />
@@ -464,7 +464,7 @@ const WalletsBtcPage: React.FC = () => {
                       </div>
                     )}
                   </div>
-                
+
                   <div className='border-b border-line mb-6 lg:mb-10'></div>
 
                   <div className='flex items-center justify-between mb-6 lg:mb-10'>
@@ -530,8 +530,8 @@ const WalletsBtcPage: React.FC = () => {
                   numInputs={6}
                   renderSeparator={<span> </span>}
                   renderInput={(props) => <input {...props} className="otp-input" />}
-                  containerStyle={{ 
-                    display: 'flex', 
+                  containerStyle={{
+                    display: 'flex',
                     justifyContent: 'center',
                   }}
                   inputStyle={{
@@ -584,7 +584,7 @@ const WalletsBtcPage: React.FC = () => {
             <p className='body-sm text-body-secondary mb-10'>${calculatedExchangeUsd} USD</p>
             <div className='flex items-center justify-between mb-2.5 w-full'>
               <p className='body-sm font-bold text-body-secondary'>To</p>
-              <p className='body text-title-active'>${calculatedExchangeUsd} USD</p>    
+              <p className='body text-title-active'>${calculatedExchangeUsd} USD</p>
             </div>
             <div className='flex items-center justify-between mb-2.5 w-full'>
               <p className='body-sm font-bold text-body-secondary'>Conversion rate</p>

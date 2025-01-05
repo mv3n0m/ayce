@@ -17,7 +17,7 @@ const LoginPage = () => {
   const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     // Prevents the default form submission behavior
     event.preventDefault();
-    
+
     try{
     const result = await signIn("credentials", {
       email: email.current,
@@ -35,7 +35,7 @@ const LoginPage = () => {
         setSignInError(true);
       }
     }
-  
+
     } catch (error) {
       console.error(error);
       setSignInError(true); // Set the sign-in error state to true if there is an error
@@ -86,7 +86,7 @@ const LoginPage = () => {
 
     </main>
   )
-  
+
 }
 
 export default LoginPage;

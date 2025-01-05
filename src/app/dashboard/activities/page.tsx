@@ -33,7 +33,7 @@ export default function ActivitiesPage() {
     if (!token) return;  // No token, don't fetch
     const fetchData = async () => {
       try {
-        const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/accounts/get-transactions`, {
+        const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/account/get-transactions`, {
           headers: {
             'Authorization': `Bearer ${token}` // Include the token in the authorization header
           }
@@ -96,7 +96,7 @@ console.log(transactions);
     const buttonElement = buttonSVGRefs.current[index];
     const modalElement = modalRefs.current[index];
     const overlayElement = overlayRefs.current[index];
-  
+
     if (window.innerWidth < 1024) { // for mobile
       if (modalElement && overlayElement) {
         if (modalElement.style.display === 'none' || modalElement.style.display === '') {
@@ -116,7 +116,7 @@ console.log(transactions);
     } else { // for desktop
       if (detailsElement) {
         const parentRow = detailsElement.previousSibling as HTMLElement;
-  
+
         if (detailsElement.style.display === '' || detailsElement.style.display === 'none') {
           detailsElement.style.display = 'table-row';
           if (parentRow) {
@@ -177,7 +177,7 @@ console.log(transactions);
     setSortColumn('btc');
     hideAllDetails();
   };
-  
+
   const toggleDateSort = () => {
     if (dateSortOrder === 'ascend') {
       setDateSortOrder('descend');
@@ -190,7 +190,7 @@ console.log(transactions);
 
   const filteredRows = () => {
     let result = transactions;
-  
+
     // Filter based on buttons
     switch (activeFilter) {
       case 'receive':  // Sales
@@ -205,12 +205,12 @@ console.log(transactions);
       default:
         break;
     }
-  
+
     // Filter based on search input
     if (searchValue.trim()) {
       result = result.filter(row => row.description.toLowerCase().includes(searchValue.trim().toLowerCase()));
     }
-  
+
     // Sort based on sortColumn and respective order after filtering
     if (sortColumn === 'btc') {
       console.log("Sorting BTC before:", result.map(r => r.btc_amount));
@@ -227,7 +227,7 @@ console.log(transactions);
           result.sort((a, b) => new Date(b.initiated_at).getTime() - new Date(a.initiated_at).getTime());
       }
     }
-  
+
     return result;
   };
 
@@ -336,10 +336,10 @@ console.log(transactions);
                         {getSVGByType(transaction.type)}
                         <p className='body text-body-primary'>
                             {
-                                transaction.description 
-                                    ? (transaction.description.length > 30 
-                                        ? transaction.description.slice(0, 30) + '...' 
-                                        : transaction.description) 
+                                transaction.description
+                                    ? (transaction.description.length > 30
+                                        ? transaction.description.slice(0, 30) + '...'
+                                        : transaction.description)
                                     : "Payment request"
                             }
                         </p>
@@ -355,17 +355,17 @@ console.log(transactions);
                     <div className='text-body-primary bg-background body-xs rounded-lg py-0.5 px-2 max-w-fit mr-auto'>
                     {
                         transaction.payment_mode
-                          ? (transaction.payment_mode === "on-chain" 
-                              ? "On-chain" 
-                              : (transaction.payment_mode === "lightning" 
-                                  ? "Lightning" 
+                          ? (transaction.payment_mode === "on-chain"
+                              ? "On-chain"
+                              : (transaction.payment_mode === "lightning"
+                                  ? "Lightning"
                                   : ""))
-                          : (transaction.type === "transfer" 
-                              ? "Transfer" 
-                              : (transaction.type === "conversion" 
-                                  ? "Conversion" 
-                                  : (transaction.type === "send" 
-                                      ? "Send" 
+                          : (transaction.type === "transfer"
+                              ? "Transfer"
+                              : (transaction.type === "conversion"
+                                  ? "Conversion"
+                                  : (transaction.type === "send"
+                                      ? "Send"
                                       : (transaction.type === "receive"
                                           ? "Receive"
                                           : "Pending"))))
@@ -406,14 +406,14 @@ console.log(transactions);
                         </div>
                       </div>
                       <div className='border-b border-line w-full'></div>
-                    
+
                     </td>
                   </tr>
-                  
+
                   {/* black overlay for mobile modal */}
-                  <div 
-                    className="fixed inset-0 bg-black opacity-25 z-10 lg:hidden" 
-                    ref={el => overlayRefs.current[index] = el} 
+                  <div
+                    className="fixed inset-0 bg-black opacity-25 z-10 lg:hidden"
+                    ref={el => overlayRefs.current[index] = el}
                     style={{ display: 'none' }}
                     onClick={() => toggleDetails(index)}
                   ></div>
@@ -455,7 +455,7 @@ console.log(transactions);
             })}
             </tbody>
           </table>
-          
+
           <div className='flex items-center justify-between text-body-secondary mt-2 pb-20'>
             <ReactPaginate className='flex space-x-4 body-sm'
                 breakLabel="..."

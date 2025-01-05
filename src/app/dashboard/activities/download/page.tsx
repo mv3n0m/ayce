@@ -63,10 +63,10 @@ export default function ActivitiesDownloadPage() {
     return filtered;
   };
 
-  
+
   const convertToCSV = (transactions) => {
     let csv = 'Name,BTC,USD,Status,Payment mode,Date,Time,Address,Transfer Fee,Transfer ID,Block Explorer\n';
-  
+
     transactions.forEach(transaction => {
       const {
         description,
@@ -81,23 +81,23 @@ export default function ActivitiesDownloadPage() {
         transaction_label,
         blockExplorer
       } = transaction;
-  
+
       const name = description ? description : "Payment request";
       const btc = btc_amount ? btc_amount.toFixed(8) : '';
       const usd = usd_amount ? parseFloat(usd_amount).toFixed(2) : '';
       const date = new Date(initiated_at * 1000).toLocaleString('en-US', { dateStyle: 'short', timeStyle: 'short' });
-      const txMode = payment_mode 
-        ? (payment_mode === "on-chain" ? "On-chain" 
-        : (payment_mode === "lightning" ? "Lightning" 
+      const txMode = payment_mode
+        ? (payment_mode === "on-chain" ? "On-chain"
+        : (payment_mode === "lightning" ? "Lightning"
         : ""))
-        : (type === "transfer" ? "Transfer" 
-        : (type === "conversion" ? "Conversion" 
+        : (type === "transfer" ? "Transfer"
+        : (type === "conversion" ? "Conversion"
         : ""));
-  
+
       // Adding row to CSV
       csv += `${name},${btc},${usd},${status},${txMode},${date},${address},${transfer_fee},${transaction_label},${blockExplorer}\n`;
     });
-  
+
     return csv;
   };
 
@@ -105,7 +105,7 @@ export default function ActivitiesDownloadPage() {
     if (!token) return;  // No token, don't fetch
     const fetchData = async () => {
       try {
-        const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/accounts/get-transactions`, {
+        const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/account/get-transactions`, {
           headers: {
             'Authorization': `Bearer ${token}` // Include the token in the authorization header
           }
@@ -155,7 +155,7 @@ export default function ActivitiesDownloadPage() {
     const currentMonth = today.getMonth();
     let startDate;
     let endDate = new Date(today); // setting default endDate to today
-  
+
     switch (timeframe) {
       case 'last-week':
         startDate = new Date(today);
@@ -178,12 +178,12 @@ export default function ActivitiesDownloadPage() {
       default:
         return ['', ''];
     }
-  
+
     // Format the date as "Month day, year"
     const format = date => date.toLocaleString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
     return [format(startDate), format(endDate)];
   };
-  
+
   const getOptionLabel = (value) => {
     switch (value) {
       case 'last-week':
@@ -206,10 +206,10 @@ export default function ActivitiesDownloadPage() {
     const blob = new Blob([csvData], { type: 'text/csv' });
     const url = window.URL.createObjectURL(blob);
     const a = document.createElement('a');
-    
+
     const [startDate, endDate] = getDateRange(selectedTimeframe);
     const filename = `Ayce transactions ${startDate} - ${endDate}.csv`;
-  
+
     a.setAttribute('hidden', '');
     a.setAttribute('href', url);
     a.setAttribute('download', filename);
@@ -217,7 +217,7 @@ export default function ActivitiesDownloadPage() {
     a.click();
     document.body.removeChild(a);
   };
-  
+
 
   const handleDownloadCSV = () => {
     const filteredTransactions = filterTransactions();
@@ -229,13 +229,13 @@ export default function ActivitiesDownloadPage() {
       <div className='flex flex-col w-full lg:w-1/2 relative'>
 
         <div className='flex items-center'>
-          
+
           <div className='lg:-top-22 lg:left-0 relative lg:absolute flex items-center mb-6 lg:mx-0 lg:mb-0'>
             <Link href="/dashboard/activities/" className='text-body-secondary body hover:text-title-active'>Activity</Link>
             <Right className='h-6 w-6 text-title-active mx-2' />
             <p className='text-title-active body'>Download</p>
           </div>
-          
+
         </div>
           <h4 className='display mb-14 mr-10 hidden lg:flex'>Activity</h4>
           <h5 className='display mb-6'>Download activity</h5>
@@ -278,8 +278,8 @@ export default function ActivitiesDownloadPage() {
 
           <p className='text-body-secondary body-sm font-bold mb-1 mt-5'>Type</p>
           <div className='relative mb-7'>
-            <select 
-            name="transactionType" 
+            <select
+            name="transactionType"
             className='bg-background p-4 w-full body rounded-2xl mb-2 text-title-active'
             value={selectedType}
             onChange={(e) => setSelectedType(e.target.value)}

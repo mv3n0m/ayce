@@ -18,7 +18,7 @@ const SignUpPage = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    
+
     //'emailRef.current' is possibly 'null'. is invalid since input is required
     const emailValue = emailRef.current.value;
     const passwordValue = passwordRef.current.value;
@@ -32,10 +32,10 @@ const SignUpPage = () => {
 
     try {
       const response = await axios.post(
-        `${process.env.NEXT_PUBLIC_API_URL}/user/register/`,
+        `${process.env.NEXT_PUBLIC_API_URL}/users/register`,
         {
-          emailaddress: emailValue,
-          pswd: passwordValue,
+          email: emailValue,
+          password: passwordValue,
         },
         {
           headers: {
@@ -43,9 +43,9 @@ const SignUpPage = () => {
           },
         }
       );
-    
+
       console.log('API Response:', response.data); // Log the response data
-    
+
       if (response.data.message && response.data.message === 'user created') {
         router.push(`/sign-up-email?email=${encodeURIComponent(emailValue)}`);
       } else if (response.data.error) {

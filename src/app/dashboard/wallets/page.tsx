@@ -82,7 +82,7 @@ export default function WalletsPage() {
     setModalStepBtc(0);
     setOtp('');
   }, [otp, modalIsOpenBtc, setModalStepBtc, setOtp]);  // Include all dependencies here
-  
+
   const handleSubmitUsd = useCallback((event) => {
     event?.preventDefault();
     console.log("Form submitted with OTP: " + otp);
@@ -90,7 +90,7 @@ export default function WalletsPage() {
     setModalStepUsd(0);
     setOtp('');
   }, [otp, modalIsOpenUsd, setModalStepUsd, setOtp]);  // Include all dependencies here
-  
+
   useEffect(() => {
     if (otp.length === 6) {
       handleSubmitBtc();
@@ -108,7 +108,7 @@ export default function WalletsPage() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/accounts/get-balances`, {
+        const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/account/get-balances`, {
           headers: {
             'Authorization': `Bearer ${token}` // Include the token in the authorization header
           }
@@ -130,7 +130,7 @@ export default function WalletsPage() {
   }, [token]);
 
   const totalAmount = (parseFloat(usdData.amount) + parseFloat(btcData.in_usd)).toLocaleString('en-US');
-  
+
   return (
     <div className='flex mx-6 lg:mx-16 mt-24 lg:mt-32 w-full sidemenu-padding'>
       <div className='flex flex-col w-full'>
@@ -176,21 +176,21 @@ export default function WalletsPage() {
                     <p className='meta text-body-secondary'>Weekly transfer</p>
                   </div>
                 </div>
-                <input 
-                  type="checkbox" 
+                <input
+                  type="checkbox"
                   className='toggle'
                   onChange={toggleBtcChecked}
                   checked={btcChecked}
                   id="switchbtc" />
-                  <label 
-                  htmlFor='switchbtc' 
+                  <label
+                  htmlFor='switchbtc'
                   className='toggle'
                   >Toggle</label>
-                
+
                 {modalOpenBtc && (
                   <div className="fixed inset-0 flex flex-col justify-center items-center bg-black bg-opacity-25 z-10">
                   <div className='bg-white modal-width lg:rounded-3xl p-6 lg:p-10 flex flex-col items-center justify-start z-20 relative'>
-                    
+
                     {modalStepBtc === 0 ? (
                       <>
                         <p className='text-title-active body-lg font-bold mb-2'>Scheduled Bitcoin Transfer</p>
@@ -225,8 +225,8 @@ export default function WalletsPage() {
                             numInputs={6}
                             renderSeparator={<span> </span>}
                             renderInput={(props) => <input {...props} className="otp-input" />}
-                            containerStyle={{ 
-                              display: 'flex', 
+                            containerStyle={{
+                              display: 'flex',
                               justifyContent: 'center',
                             }}
                             inputStyle={{
@@ -260,7 +260,7 @@ export default function WalletsPage() {
               )}
               </div>
           </div>
-      
+
           <div className='bg-secondary-aquamarineLight rounded-3xl border-secondary-aquamarine border-2 w-full lg:w-1/2 flex flex-col justify-between items-start p-6 lg:px-10 lg:py-8'>
             <div className='flex justify-between w-full'>
               <div className='flex flex-col justify-center'>
@@ -290,21 +290,21 @@ export default function WalletsPage() {
                     <p className='meta text-body-secondary'>Daily transfer</p>
                   </div>
                 </div>
-                <input 
-                type="checkbox" 
+                <input
+                type="checkbox"
                 className='toggle'
                 onChange={toggleUsdChecked}
                 checked={usdChecked}
                 id="switchusd" />
-                <label 
-                htmlFor='switchusd' 
+                <label
+                htmlFor='switchusd'
                 className='toggle'>Toggle
                 </label>
 
                 {modalOpenUsd && (
                   <div className="fixed inset-0 flex flex-col justify-center items-center bg-black bg-opacity-25 z-10">
                   <div className='bg-white modal-width lg:rounded-3xl p-6 lg:p-10 flex flex-col items-center justify-start z-20 relative'>
-                    
+
                     {modalStepUsd === 0 ? (
                       <>
                         <p className='text-title-active body-lg font-bold mb-2'>Scheduled Bank Transfer</p>
@@ -340,8 +340,8 @@ export default function WalletsPage() {
                             numInputs={6}
                             renderSeparator={<span> </span>}
                             renderInput={(props) => <input {...props} className="otp-input" />}
-                            containerStyle={{ 
-                              display: 'flex', 
+                            containerStyle={{
+                              display: 'flex',
                               justifyContent: 'center',
                             }}
                             inputStyle={{

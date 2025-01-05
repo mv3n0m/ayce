@@ -18,22 +18,22 @@ const ForgotPasswordPage = () => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-    
+
         const emailValue = emailRef.current.value;
-    
+
         try {
             const response = await axios.post(
-                `${process.env.NEXT_PUBLIC_API_URL}/user/reset/password?email=${encodeURIComponent(emailValue)}`,
-                null,
+                `${process.env.NEXT_PUBLIC_API_URL}/users/request-password-reset`,
+                {'email': emailValue},
                 {
                     headers: {
                         'Content-Type': 'application/json',
                     },
                 }
             );
-    
+
             console.log('API Response:', response.data);
-    
+
             const { message } = response.data;
 
             if (message) {
@@ -48,7 +48,7 @@ const ForgotPasswordPage = () => {
             errorMessageRef.current.innerText = `Email doesn't exist.`;
         }
     };
-    
+
   return (
     <main className='flex min-h-screen flex-col items-center justify-start bg-white lg:bg-background'>
         <div className='mt-6 mb-10 lg:mt-12 lg:mb-16'>
@@ -89,7 +89,7 @@ const ForgotPasswordPage = () => {
 
     </main>
   )
-  
+
 }
 
 export default ForgotPasswordPage;

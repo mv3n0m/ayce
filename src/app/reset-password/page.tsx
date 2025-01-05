@@ -19,7 +19,7 @@ const ResetPasswordPage = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    
+
     const passwordValue = passwordRef.current.value;
     const reEnterPasswordValue = reEnterPasswordRef.current.value;
 
@@ -31,9 +31,9 @@ const ResetPasswordPage = () => {
 
     try {
       const response = await axios.post(
-        // exmaple with query 
+        // exmaple with query
         // https:ayce/reset-pass/query=36468879512679kghfhdg
-        `${process.env.NEXT_PUBLIC_API_URL}/user/update/password`,
+        `${process.env.NEXT_PUBLIC_API_URL}/users/reset-password`,
         {
           token: token,
           password: passwordValue,
@@ -44,11 +44,11 @@ const ResetPasswordPage = () => {
           },
         }
       );
-    
+
       console.log('API Response:', response.data); // Log the response data
-    
+
       const { message, status } = response.data;
-    
+
       if (status === 'success') {
 
         router.push(`/reset-password-email`);
@@ -106,7 +106,7 @@ const ResetPasswordPage = () => {
 
     </main>
   )
-  
+
 }
 
 export default ResetPasswordPage;

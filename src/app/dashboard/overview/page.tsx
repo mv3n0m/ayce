@@ -22,7 +22,7 @@ export default function OverviewPage() {
     if (!token) return;  // No token, don't fetch
     const fetchData = async () => {
       try {
-        const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/accounts/get-balances`, {
+        const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/account/get-balances`, {
           headers: {
             'Authorization': `Bearer ${token}` // Include the token in the authorization header
           }
@@ -62,7 +62,7 @@ export default function OverviewPage() {
               </div>
             </div>
           </div>
-      
+
           <div className='bg-secondary-aquamarineLight rounded-3xl border-secondary-aquamarine border-2 w-full p-6 lg:px-10 lg:py-8 lg:w-1/2'>
             <div className='flex justify-between items-start'>
               <div className='flex flex-col justify-center'>
